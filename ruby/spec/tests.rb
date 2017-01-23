@@ -28,7 +28,7 @@ end
 #topswops.rb
 describe Topswops do
   let(:answer) { read_data("topswop.txt") }
-  let(:answer_2) { read_data("max_topswop.txt") }
+  let(:answer_2) { read_data("max_topswops.txt") }
 
   it "swops should be correct" do
     array = [8, 3, 10, 2, 5, 9, 1, 7, 4, 6]
@@ -54,3 +54,18 @@ describe CycleDetection do
     expect(CycleDetection.analyze(f, 3)).to eq(answer)
   end
 end
+
+
+# truncatable_primes.rb
+describe TruncatablePrime do
+
+  it "can find largest left truncatable below a large number" do
+    expect(TruncatablePrime.find_max(1000000)).to eq(999907)
+  end
+
+  it "can find largest right truncatable below a large number" do
+    expect(TruncatablePrime.find_max(10000, "right")).to eq(7393)
+  end
+
+end
+
