@@ -8,7 +8,7 @@ object TwoSum {
       acc match {
         case Some(v) => Some(v)
         case _ => {
-          numWithIndex.find(n => n._1 == value._1).map(v => (value._2, v._2))
+          numWithIndex.find(n => n._1 == value._1 && n._2 != value._2).map(v => (value._2, v._2))
         }
       }
     }
@@ -18,7 +18,9 @@ object TwoSum {
   }
 }
 
-assert(TwoSum.run(Array(1,2,3), target=3) == Some(0,1))
-assert(TwoSum.run(Array(1,2,3), target=9).isEmpty)
-assert(TwoSum.run(Array(0,9,1), target=10) == Some(1,2))
-assert(TwoSum.run(Array(1,1,3,1,8), target=11) == Some(2,4))
+assert(TwoSum.run(Array(1,2,3), 3) == Some(0,1))
+assert(TwoSum.run(Array(1,2,3), 9).isEmpty)
+assert(TwoSum.run(Array(0,9,1), 10) == Some(1,2))
+assert(TwoSum.run(Array(1,1,3,1,8), 11) == Some(2,4))
+assert(TwoSum.run(Array(3,4,2), 6) == Some(1,2))
+
