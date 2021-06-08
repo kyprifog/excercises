@@ -1,5 +1,7 @@
 .idea/
 .idea/*
+python/.direnv/
+python/.direnv/*
 .DS_Store
 target/
 target/**

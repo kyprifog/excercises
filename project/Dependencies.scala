@@ -2,15 +2,18 @@ import sbt._
 
 object Dependencies {
 
-  lazy val CatsEffectVersion  = "0.5"
+  lazy val CatsEffectVersion  = "2.5.1"
   lazy val MonixVersion       = "3.0.0-M2"
   lazy val Fs2Version         = "0.10.0-M8"
   lazy val Http4sVersion      = "0.18.0-M5"
   lazy val CirceVersion       = "0.9.0-M2"
   lazy val DoobieVersion      = "0.5.0-M9"
   lazy val SttpVersion        = "1.0.5"
+  lazy val scioVersion        = "0.10.3"
 
   lazy val catsEffect     = "org.typelevel"   %% "cats-effect"          % CatsEffectVersion
+  lazy val scio = "com.spotify" %% "scio-core" % scioVersion
+
   lazy val monixEval      = "io.monix"        %% "monix-eval"           % MonixVersion
 
   lazy val fs2            = "co.fs2"          %% "fs2-core"             % Fs2Version

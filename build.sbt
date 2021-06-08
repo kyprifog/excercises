@@ -20,6 +20,7 @@ lazy val root = (project in file(".")).settings(
   name := "cats-effect-demo",
   libraryDependencies ++= Seq(
     catsEffect,
+    scio,
     monixEval,
     fs2,
     http4sServer,
@@ -33,6 +34,6 @@ lazy val root = (project in file(".")).settings(
     sttp,
     sttpCats,
     simulcrum,
-    scalaTest % Test
+    scalaTest
   )
 )
