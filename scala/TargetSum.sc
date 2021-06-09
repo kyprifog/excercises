@@ -12,8 +12,13 @@ object TargetSum {
     }
   }
 
+  def run2(list: List[Int], target: Int) = {
+    list.combinations(2).find(_.sum == target).get.map(list.indexOf)
+  }
+
 }
 
 assert(TargetSum.run(List(1,2,3,4,5,6,7,8,9), 10)._2 == List((4,6), (3,7),(2,8),(1,9)))
 assert(TargetSum.run(List(1,9), 10)._2 == List((1,9)))
 assert(TargetSum.run(List(1,1), 10)._2 == List())
+TargetSum.run(List(1,2,3,4,5,6,7,8,9))

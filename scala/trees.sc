@@ -1,4 +1,5 @@
 
+// TODO: Unfinished
 
 sealed trait Tree[+A] {
   def size = {

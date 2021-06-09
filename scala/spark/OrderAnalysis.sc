@@ -57,9 +57,71 @@ object OrderAnalysis {
 
   }
 
+  def runSQL(orderPath: String, productPath: String): Total = {
+
+    val spark = SparkSession
+      .builder()
+      .master("local[4]")
+      .appName("OrderAnalysis")
+      .getOrCreate()
+
+    import spark.implicits._
+
+    val orderSchema = Encoders.product[Order].schema
+    val orders = spark.read
+      .schema(orderSchema)
+      .option("header", true)
+      .option("ignoreLeadingWhiteSpace",true)
+      .option("ignoreTrailingWhiteSpace",true)
+      .option("timestampFormat", "MM-dd-yyyy'T'HH:mm:ss.SSSS")
+      .csv(orderPath)
+      .as[Order]
+      .dropDuplicates("order_id")
+      .withColumn("key", concat(col("product_id"), lit('-'), col("store")))
+
+    val productSchema = Encoders.product[Product].schema
+    val products = spark.read
+      .schema(productSchema)
+      .option("header", true)
+      .csv(productPath)
+      .as[Product]
+      .withColumn("key", concat(col("product_id"), lit('-'), col("store")))
+      .select("price", "key")
+      .dropDuplicates("key")
+
+    orders.createTempView("orders")
+    products.createTempView("products")
+
+    val query =
+      """
+      SELECT store, total FROM (
+        SELECT
+          store,
+          SUM(total) AS total
+        FROM (
+          SELECT
+            products.key AS key,
+            store,
+            quantity_sold,
+            price,
+            quantity_sold * price AS total
+          FROM
+            products JOIN orders ON products.key = orders.key
+        ) GROUP BY store
+      ) SORT BY total DESC
+      """.stripMargin
+    val totals = spark.sql(query).as[Total]
+    totals.show()
+    totals.head()
+  }
+
+
 }
 
 val path = "/Users/kyle/dev/excercises/data/"
 val max = OrderAnalysis.run(path + "orders.txt", path + "products.txt")
 assert(max.asString() == "walmart - 31400.0")
+
+val maxSQL = OrderAnalysis.runSQL(path + "orders.txt", path + "products.txt")
+assert(maxSQL.asString() == "walmart - 31400.0")
 

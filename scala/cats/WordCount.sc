@@ -39,7 +39,6 @@ object WordCount {
 }
 
 
-
 WordCount.run("/Users/kyle/dev/excercises/data/pg1787.txt", "/tmp/wordcount/results.txt")
 
 
