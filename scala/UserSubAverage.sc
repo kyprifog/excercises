@@ -46,6 +46,7 @@ object UserSubAverage {
         r._2.map(_.print())
       })
   }
+
 }
 
 UserSubAverage.run("/Users/kyle/dev/excercises/data/users.txt")
