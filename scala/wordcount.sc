@@ -1,8 +1,10 @@
-
 import scala.io.Source
 
 object WordCount {
   def run(input: String): Unit = {
+
+    implicit def ord: Ordering[(String, Long)] = Ordering.apply(_._2 compare _._2)
+
     val file = Source.fromFile(input)
     val col = file.getLines.toList
       .map(_.trim.toLowerCase)

@@ -10,10 +10,10 @@ object Dependencies {
   lazy val DoobieVersion      = "0.5.0-M9"
   lazy val SttpVersion        = "1.0.5"
   lazy val scioVersion        = "0.10.3"
+  lazy val framelessVersion   = "0.9.0"
 
   lazy val catsEffect     = "org.typelevel"   %% "cats-effect"          % CatsEffectVersion
   lazy val scio = "com.spotify" %% "scio-core" % scioVersion
-
   lazy val monixEval      = "io.monix"        %% "monix-eval"           % MonixVersion
 
   lazy val fs2            = "co.fs2"          %% "fs2-core"             % Fs2Version
@@ -36,4 +36,9 @@ object Dependencies {
   lazy val scalaTest      = "org.scalatest"   %% "scalatest"            % "3.0.3"
   lazy val simulcrum      = "com.github.mpilquist" %% "simulacrum" % "0.13.0"
 
+  lazy val sparkCore = "org.apache.spark" %% "spark-core" % "3.1.2"
+  lazy val sparkSQL = "org.apache.spark" %% "spark-sql" % "3.1.2"
+  lazy val frameless = "org.typelevel" %% "frameless-dataset" % framelessVersion
+  lazy val framelessCats = "org.typelevel" %% "frameless-cats" % framelessVersion
+  lazy val framelessML = "org.typelevel" %% "frameless-ml" % framelessVersion
 }

@@ -23,6 +23,8 @@ lazy val root = (project in file(".")).settings(
     scio,
     monixEval,
     fs2,
+    sparkCore,
+    sparkSQL,
     http4sServer,
     http4sSClient,
     http4sDsl,
@@ -34,6 +36,9 @@ lazy val root = (project in file(".")).settings(
     sttp,
     sttpCats,
     simulcrum,
-    scalaTest
+    scalaTest,
+    frameless,
+    framelessCats,
+    framelessML,
   )
 )
