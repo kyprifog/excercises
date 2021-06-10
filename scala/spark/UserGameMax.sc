@@ -1,6 +1,6 @@
 import org.apache.spark.sql.{Encoders, SparkSession}
 
-object UserSubAverage {
+object UserGameMax {
   case class Record(name: String, game: String, score: String)
 
   def run(source: String) = {
@@ -33,5 +33,5 @@ object UserSubAverage {
   }
 }
 
-UserSubAverage.run("/Users/kyle/dev/excercises/data/users.txt")
+UserGameMax.run("/Users/kyle/dev/excercises/data/users.txt")
 
