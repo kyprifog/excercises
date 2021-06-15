@@ -11,6 +11,8 @@ class CrosswordSolver(grid: List[List[String]]) {
       matrix.find{r => r._2 == i && r._3 == j}
     }
 
+    // To add diagonals all you have to do is add cross components i+-1, j+-1 here
+
     List(
       get(i+1,j),
       get(i-1,j),
