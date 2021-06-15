@@ -12,7 +12,7 @@ class WindowedAverager(window: Int) {
     }
 
     prevSum = prevSum - remove + x
-    stack = (stack ++ List(x)).takeRight(window)
+    stack = (stack ++ List(x)).takeRight(window).toList
     val len = stack.length
     prevSum.toDouble / len.toDouble
   }

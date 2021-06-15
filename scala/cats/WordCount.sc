@@ -3,7 +3,6 @@ import cats.effect.{IO, Resource}
 import scala.io.{BufferedSource, Source}
 import java.io.FileWriter
 
-
 object WordCount {
 
   def run(input: String, output: String): Unit = {
