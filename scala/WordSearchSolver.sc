@@ -1,4 +1,4 @@
-class CrosswordSolver(grid: List[List[String]]) {
+class WordSearchSolver(grid: List[List[String]]) {
 
   val matrix: List[(String, Int, Int)] =
     for {
@@ -79,5 +79,5 @@ val dictionary = List(
 
 
 val result = List("ART", "PAR", "EYE", "HOP", "TRAP", "HOCKEY", "YET", "PART")
-val exp = new CrosswordSolver(grid).run(dictionary)
+val exp = new WordSearchSolver(grid).run(dictionary)
 assert(exp == result)
