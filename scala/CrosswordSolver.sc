@@ -22,15 +22,15 @@ class CrosswordSolver(grid: List[List[String]]) {
   def run(dictionary: List[String]): List[String] = {
     val max: Int = dictionary.map(_.length).max
     (1 until max).foldLeft((matrix, List[String]())) { case(acc, n)  =>
-      val prevIt = acc._1
-      val matches = acc._2
+      val prevIt: List[(String, Int, Int)] = acc._1
+      val matches: List[String] = acc._2
 
-      val neighbors = prevIt
+      val neighbors: List[(String, Int, Int)] = prevIt
         .flatMap{m =>
           getNeighbors(m._2, m._3).map(r => (f"${m._1}${r._1}", r._2, r._3))
         }
 
-      val newMatches = matches ++ neighbors.map(_._1).filter{f => dictionary.map(d => f == d).foldLeft(false)(_||_) }
+      val newMatches: List[String] = matches ++ neighbors.map(_._1).filter{f => dictionary.map(d => f == d).foldLeft(false)(_||_) }
       val nextIt = neighbors.filter(f => dictionary.map(d => d.startsWith(f._1)).foldLeft(false)(_||_))
       (nextIt, newMatches)
     }._2.toSet.toList
