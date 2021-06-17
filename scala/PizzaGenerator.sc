@@ -79,6 +79,7 @@ class PizzaGenerator(ingredients: Set[String], maxLength: Int) {
   }
 
   def generatePizza(maxLength: Int): Pizza = {
+    // This skews towards lower topping pizzas, could improve it by making number unevenly distributed
     val number = scala.util.Random.nextInt(maxLength)
     val entries = Random.shuffle(ingredients.toList).take(number)
     Pizza(entries.toSet)
