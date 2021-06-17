@@ -17,7 +17,7 @@ lazy val root = (project in file(".")).settings(
       )
     )
   ),
-  name := "cats-effect-demo",
+  name := "excercises",
   libraryDependencies ++= Seq(
     catsEffect,
     scio,
