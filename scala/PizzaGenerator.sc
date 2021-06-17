@@ -157,9 +157,9 @@ assert(menu2.pizzas.toSet.intersect(menu1.pizzas.toSet).toList.isEmpty)
 
 // Shows that you probbably wont get pizzas recommend from bitAgo, today
 for (s<-(0 to 1000)) {
-  val (pizzas0, history0) = pg.getTodaysMenu(numPizzas = 10, date=Some(whileAgo))
-  val (pizzas1, history1) = pg.getTodaysMenu(numPizzas = 10, Some(history0), Some(bitAgo))
-  val (pizzas2, history2) = pg.getTodaysMenu(numPizzas = 10, Some(history1), Some(today))
+  val (menu0, history0) = pg.getTodaysMenu(numPizzas = 10, date=Some(whileAgo))
+  val (menu1, history1) = pg.getTodaysMenu(numPizzas = 10, Some(history0), Some(bitAgo))
+  val (menu2, history2) = pg.getTodaysMenu(numPizzas = 10, Some(history1), Some(today))
   assert(menu2.pizzas.toSet.intersect(menu1.pizzas.toSet).toList.isEmpty)
 }
 
