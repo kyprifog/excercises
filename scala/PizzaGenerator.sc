@@ -13,7 +13,14 @@ class PizzaGenerator(ingredients: Set[String], maxLength: Int) {
       if (toppings.isEmpty) { "None" } else { s"${toppings.toList.sorted.mkString(", ")}"}
     }
 
-    def print(): Unit = println(hash())
+    def print(i: Integer): Unit = {
+      val message = if (i == 1) {
+        s"${i}. Vegetarian: ${hash()}"
+      } else {
+        s"${i}. ${hash()}"
+      }
+      println(message)
+    }
   }
 
   case class Menu(pizzas: List[Pizza]) {
@@ -22,7 +29,7 @@ class PizzaGenerator(ingredients: Set[String], maxLength: Int) {
       val formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd")
       println(s"Today's Pizza Menu (${today.toLocalDate.format(formatter)}):")
       println("-"*100)
-      for (p <- pizzas) { p.print() }
+      for ((p,i) <- pizzas.zipWithIndex) { p.print(i+1) }
     }
   }
 
@@ -46,7 +53,7 @@ class PizzaGenerator(ingredients: Set[String], maxLength: Int) {
     val (pizzas, newEntries) = (1 to numPizzas).foldLeft((List[Pizza](), lastYearsEntries)){case (acc, n) =>
         val newPizzas: List[Pizza] = acc._1
         val prevHistory: List[(LocalDateTime, String)] = acc._2
-        val pizza = getPizza(prevHistory.map(_._2))
+        val pizza = getPizza(prevHistory.map(_._2), n)
         pizza.map{p =>
           (newPizzas ++ pizza, prevHistory ++ List((today, p.hash())))
         }.getOrElse(newPizzas, prevHistory)
@@ -62,13 +69,15 @@ class PizzaGenerator(ingredients: Set[String], maxLength: Int) {
     }
   }
 
-  def getPizza(history: List[String]): Option[Pizza] = {
+  def getPizza(history: List[String], n: Integer): Option[Pizza] = {
+
+
     var pizza: Option[Pizza] = None
     // Sanity check, sum of combinations is 2 ^ length
-    val maxCombinations =  2 ^ maxLength
+    val maxCombinations =  scala.math.pow(2,maxLength).toInt
 
     for (i <-(0 to maxCombinations) if (pizza.isEmpty)) {
-      val candidatePizza = generatePizza(maxLength)
+      val candidatePizza = generatePizza(maxLength, n)
 
       // this could be improved with a bloom filter
       if (!history.contains(candidatePizza.hash())) {
@@ -78,15 +87,27 @@ class PizzaGenerator(ingredients: Set[String], maxLength: Int) {
     pizza
   }
 
-  def generatePizza(maxLength: Int): Pizza = {
+  def generatePizza(maxLength: Int, index: Int): Pizza = {
     // This skews towards lower topping pizzas, could improve it by making number unevenly distributed
+
+    val meatIngredients = Set(
+      "pepperoni",
+      "bacon",
+      "ham"
+    )
+
+    val ingred = if (index == 1) {
+      ingredients.diff(meatIngredients)
+    } else { ingredients }
+
     val number = scala.util.Random.nextInt(maxLength)
-    val entries = Random.shuffle(ingredients.toList).take(number)
+    val entries = Random.shuffle(ingred.toList).take(number)
     Pizza(entries.toSet)
   }
 }
 
 /// TEST CODE
+
 
 val toppings: Set[String] = List(
   "garlic",
@@ -112,51 +133,52 @@ val (menu0, history0) = pg.getTodaysMenu(numPizzas = 10, date=Some(whileAgo), pr
 val (menu1, history1) = pg.getTodaysMenu(numPizzas = 10, Some(history0), Some(bitAgo), true)
 val (menu2, history2) = pg.getTodaysMenu(numPizzas = 10, Some(history1), Some(today), true)
 
+
 // -> STDOUT
 //    ----------------------------------------------------------------------------------------------------
 //    Today's Pizza Menu (2019-09-30):
 //    ----------------------------------------------------------------------------------------------------
-//    bacon, garlic, ham, mushroom, olives
-//    artichoke, arugula, bacon, basil, ham, olives, pineapple
-//    garlic
-//    pepperoni
-//    green peppers, olives
-//    arugula, garlic, green peppers, ham, olives, onion, pepperoni
-//    artichoke, arugula, basil, ham, olives, onion, pineapple
-//    None
-//    artichoke, bacon, basil, garlic, olives
-//    arugula, bacon, garlic, ham, mushroom
+//    1. Vegetarian: artichoke, arugula, basil, garlic, green peppers, mushroom, olives, onion, pineapple
+//    2. None
+//    3. arugula, bacon, basil, ham, mushroom, olives, onion, pepperoni, pineapple
+//    4. artichoke, arugula, bacon, basil, garlic, olives, onion, pepperoni
+//    5. arugula, bacon, garlic, green peppers, mushroom, pineapple
+//    6. artichoke, arugula, bacon, basil, green peppers, ham, mushroom, olives, onion, pepperoni
+//    7. artichoke, arugula, basil, mushroom
+//    8. arugula, bacon, basil, garlic, ham, mushroom, olives, pepperoni, pineapple
+//    9. artichoke, arugula, green peppers, onion, pineapple
+//    10. arugula, bacon, garlic, green peppers, mushroom, olives, pineapple
 //    ----------------------------------------------------------------------------------------------------
 //    Today's Pizza Menu (2020-07-10):
 //    ----------------------------------------------------------------------------------------------------
-//    basil
-//    ham, olives
-//    bacon, basil, garlic, onion, pepperoni
-//    artichoke, bacon, onion, pineapple
-//    artichoke, arugula, bacon, basil, garlic, green peppers, ham, mushroom, olives, pepperoni, pineapple
-//    ham, onion, pepperoni
-//    artichoke, olives
-//    bacon, garlic, green peppers, pepperoni
-//    artichoke, bacon, garlic, green peppers, ham, onion, pepperoni
-//    mushroom, olives, pineapple
+//    1. Vegetarian: artichoke, arugula, garlic, mushroom, olives, onion, pineapple
+//    2. garlic, onion, pepperoni
+//    3. artichoke, arugula, bacon, basil, garlic, green peppers, ham, onion, pineapple
+//    4. artichoke, arugula, green peppers, onion, pepperoni
+//    5. artichoke, arugula, bacon, basil, garlic, green peppers, ham, mushroom, olives, onion, pineapple
+//    6. artichoke, arugula, green peppers, ham, olives, onion, pepperoni, pineapple
+//    7. bacon, basil, garlic, mushroom, onion, pepperoni, pineapple
+//    8. basil, green peppers, ham, mushroom, olives, pepperoni, pineapple
+//    9. bacon, green peppers, mushroom, pepperoni
+//    10. arugula, basil, garlic, ham, pepperoni, pineapple
 //    ----------------------------------------------------------------------------------------------------
 //    Today's Pizza Menu (2021-06-17):
 //    ----------------------------------------------------------------------------------------------------
-//    bacon, basil, green peppers, ham, mushroom, olives, onion, pineapple
-//    None
-//    basil, green peppers, ham, olives, pineapple
-//    artichoke, arugula, bacon, garlic, green peppers, ham, mushroom, olives, pineapple
-//    olives
-//    arugula, bacon, basil, garlic, green peppers, onion, pepperoni, pineapple
-//    green peppers, mushroom, pepperoni, pineapple
-//    arugula, garlic, green peppers, olives
-//    green peppers, olives
-//    artichoke, arugula, bacon, garlic, olives, onion, pepperoni, pineapple
+//    1. Vegetarian: artichoke, arugula, basil, garlic, green peppers, mushroom, onion, pineapple
+//    2. artichoke, arugula, bacon, olives, onion, pineapple
+//    3. artichoke, arugula, bacon, basil, ham, onion, pineapple
+//    4. basil, green peppers, mushroom, olives, onion, pepperoni
+//    5. arugula, bacon, basil, garlic, green peppers, ham, mushroom, olives, onion, pepperoni, pineapple
+//    6. artichoke, arugula, bacon, garlic, ham, mushroom, olives, onion, pepperoni, pineapple
+//    7. artichoke, arugula, bacon, green peppers, ham, mushroom, olives, pineapple
+//    8. arugula, bacon, basil, green peppers, ham, mushroom, olives, onion, pepperoni, pineapple
+//    9. pineapple
+//    10. onion
 
-assert(menu2.pizzas.toSet.intersect(menu1.pizzas.toSet).toList.isEmpty)
+
 
 // Shows that you probbably wont get pizzas recommend from bitAgo, today
-for (s<-(0 to 1000)) {
+for (s <- (0 to 1000)) {
   val (menu0, history0) = pg.getTodaysMenu(numPizzas = 10, date=Some(whileAgo))
   val (menu1, history1) = pg.getTodaysMenu(numPizzas = 10, Some(history0), Some(bitAgo))
   val (menu2, history2) = pg.getTodaysMenu(numPizzas = 10, Some(history1), Some(today))
@@ -164,3 +186,4 @@ for (s<-(0 to 1000)) {
 }
 
 println("\nDone")
+
