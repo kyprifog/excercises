@@ -2,6 +2,7 @@ case class Point2(x: Double, y: Double)
 case class Line2(start: Point2, end: Point2)
 
 object LineInt {
+  //  Given two line segments determine if they intersect at a point and at what point
 
   def slopeIntercept(line: Line2): (Double, Double) = {
     val slope = (line.end.y - line.start.y) / (line.end.x - line.start.x)
