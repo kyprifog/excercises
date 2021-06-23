@@ -4,16 +4,22 @@ object Dependencies {
 
   lazy val CatsEffectVersion  = "2.5.1"
   lazy val MonixVersion       = "3.0.0-M2"
-  lazy val Fs2Version         = "0.10.0-M8"
+  lazy val Fs2Version         = "3.0.4"
   lazy val Http4sVersion      = "0.18.0-M5"
   lazy val CirceVersion       = "0.9.0-M2"
   lazy val DoobieVersion      = "0.5.0-M9"
   lazy val SttpVersion        = "1.0.5"
   lazy val scioVersion        = "0.10.3"
   lazy val framelessVersion   = "0.9.0"
+  lazy val beamVersion = "2.4.0"
+  lazy val kafkaVersion = "2.6.0"
+  val flinkVersion = "1.13.0"
 
   lazy val catsEffect     = "org.typelevel"   %% "cats-effect"          % CatsEffectVersion
   lazy val scio = "com.spotify" %% "scio-core" % scioVersion
+  lazy val beamKafkaRunners = "org.apache.beam" % "beam-sdks-java-io-kafka" % beamVersion
+  lazy val kafkaClient = "org.apache.kafka" % "kafka-clients" % kafkaVersion
+  //lazy val beamJavaRunners = "org.apache.beam" % "beam-runners-direct-java" % beamVersion
   lazy val monixEval      = "io.monix"        %% "monix-eval"           % MonixVersion
 
   lazy val fs2            = "co.fs2"          %% "fs2-core"             % Fs2Version
@@ -41,4 +47,7 @@ object Dependencies {
   lazy val frameless = "org.typelevel" %% "frameless-dataset" % framelessVersion
   lazy val framelessCats = "org.typelevel" %% "frameless-cats" % framelessVersion
   lazy val framelessML = "org.typelevel" %% "frameless-ml" % framelessVersion
+  lazy val scalaFaker = "it.bitbl" %% "scala-faker" % "0.4"
+  lazy val flink = "org.apache.flink" %% "flink-scala" % flinkVersion
+  lazy val flinkStreaming = "org.apache.flink" %% "flink-streaming-scala" % flinkVersion
 }

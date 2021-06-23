@@ -40,5 +40,10 @@ lazy val root = (project in file(".")).settings(
     frameless,
     framelessCats,
     framelessML,
+    beamKafkaRunners,
+    kafkaClient,
+    scalaFaker,
+    flink,
+    flinkStreaming
   )
 )

@@ -16,7 +16,6 @@ object KafkaProperties {
     props.put("key.deserializer", classOf[StringDeserializer])
     props.put("value.deserializer", classOf[StringDeserializer])
     props.put("group.id", "TestGroup")
-    props.put("group.id", "TestGroup")
     props.put("transactional.id", "trans-id")
 
     props
@@ -67,7 +66,6 @@ object Consumer {
     consumer.close()
     newHist
   }
-
 
 }
 
