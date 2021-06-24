@@ -1,11 +1,8 @@
-import com.spotify.scio.ContextAndArgs
+import com.spotify.scio.ScioContext
 
 object WordCount {
-  def main(cmdlineArgs: Array[String]): Unit = {
-    val (sc, args) = ContextAndArgs(cmdlineArgs)
-
-    val input = args("input")
-    val output = args("output")
+  def run(input: String, output: String): Unit = {
+    val sc = ScioContext()
 
     implicit def ord: Ordering[(String, Long)] = Ordering.apply(_._2 compare _._2)
 
@@ -28,7 +25,7 @@ object WordCount {
 //val inputFile = "https://www.gutenberg.org/cache/epub/1787/pg1787.txt"
 val inputFile = "/Users/kyle/dev/excercises/data/pg1787.txt"
 
-WordCount.main(Array(f"--input=${inputFile}", f"--output=/tmp/wordcount/"))
+WordCount.run(inputFile, "/tmp/wordcount/")
 
 
 
