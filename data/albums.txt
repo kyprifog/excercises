@@ -1,0 +1,8 @@
+album_id, genre, subgenre
+1, classical, classical piano
+2, rock, folk rock
+3, rock, alternative rock
+3, rock, alternative rock
+3, rock, alternative rock
+4, badgenre, badsubgenre
+5, rock, folk rock

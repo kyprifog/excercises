@@ -1,0 +1,20 @@
+{"user_id": 1, "song_id": 1, "dislike": false, "time": 1}
+{"user_id": 1, "song_id": 2, "dislike": false, "time": 2}
+{"user_id": 1, "song_id": 3, "dislike": false, "time": 3}
+{"user_id": 1, "song_id": 1, "dislike": true, "time": 4}
+{"user_id": 2, "song_id": 2, "dislike": false, "time": 5}
+{"user_id": 3, "song_id": 3, "dislike": false, "time": 6}
+{"user_id": 4, "song_id": 1, "dislike": false, "time": 7}
+{"user_id": 4, "song_id": 2, "dislike": false, "time": 8}
+{"user_id": 4, "song_id": 3, "dislike": false, "time": 9}
+{"user_id": 4, "song_id": 3, "dislike": true, "time": 10}
+{"user_id": 5, "song_id": 1, "dislike": false, "time":11}
+{"user_id": 5, "song_id": 2, "dislike": false, "time":12}
+{"user_id": 5, "song_id": 3, "dislike": false, "time": 13}
+{"user_id": 5, "song_id": 3, "dislike": false, "time": 14}
+{"user_id": 5, "song_id": 3, "dislike": true, "time": 15}
+{"user_id": 5, "song_id": 3, "dislike": false, "time": 16}
+{"user_id": 5, "song_id": 4, "dislike": false, "time":17}
+{"user_id": 5, "song_id": 4, "dislike": true, "time":18}
+{"user_id": 5, "song_id": 5, "dislike": false, "time":19}
+{"user_id": 5, "song_id": 3, "dislike": true, "time": 20}

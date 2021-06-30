@@ -1,0 +1,10 @@
+song_id, name, album_id, mood
+1, les tendres plaintes, 1, calm
+2, tambourine man, 2, pensive
+3, bodysnatchers, 3, moving
+3, bodysnatchers, 3, moving
+3, bodysnatchers, 3, moving
+3, bodysnatchers, 3, moving
+4, bodysnatchers, 4, badmood
+5, sound of silence, 5, calm
+
