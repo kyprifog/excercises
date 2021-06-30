@@ -123,6 +123,12 @@ OrderAnalysis.run(path + "orders.txt", path + "products.txt")
 OrderAnalysis.runMapSide(path + "orders.txt", path + "products.txt")
 OrderAnalysis.runHash(path + "orders.txt", path + "products.txt")
 
+// STDOUT
+// amazon : 19800.0
+// walmart : 31400.0
+// bestbuy : 5000.0
+
+
 println("Done")
 
 

@@ -23,9 +23,28 @@ object WordCount {
 
 
 //val inputFile = "https://www.gutenberg.org/cache/epub/1787/pg1787.txt"
-val inputFile = "/Users/kyle/dev/excercises/data/pg1787.txt"
+val inputFile = "/Users/kyle/dev/excercises/data/hamlet.txt"
 
 WordCount.run(inputFile, "/tmp/wordcount/")
 
-
-
+  //STDOUT
+  //  (the,971)
+  //  (and,723)
+  //  (of,671)
+  //  (to,656)
+  //  (I,549)
+  //  (you,503)
+  //  (a,479)
+  //  (my,444)
+  //  (in,404)
+  //  (it,367)
+  //  (Ham,358)
+  //  (is,337)
+  //  (not,302)
+  //  (his,286)
+  //  (And,273)
+  //  (that,270)
+  //  (this,257)
+  //  (with,238)
+  //  (me,234)
+  //  (your,225)

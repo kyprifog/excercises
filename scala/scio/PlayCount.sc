@@ -38,4 +38,18 @@ object PlayCount {
 }
 
 val path = "/Users/kyle/dev/excercises/data/"
-PlayCount.run(12, path + "kinglear.txt", path + "hamlet.txt")
+PlayCount.run(13, path + "kinglear.txt", path + "hamlet.txt")
+
+// STDOUT:
+//    (misconstruction,List(kinglear))
+//    (flibbertigibbet,List(kinglear))
+//    (merchantability,List(hamlet, kinglear))
+//    (fortifications,List(hamlet))
+//    (unaccommodated,List(kinglear))
+//    (counterfeiting,List(kinglear))
+//    (unproportion'd,List(hamlet))
+//    (indistinguish'd,List(kinglear))
+//    (superserviceable,List(kinglear))
+//    (perpendicularly,List(kinglear))
+//    (electronically,List(hamlet, kinglear))
+//    (transformation,List(hamlet))
