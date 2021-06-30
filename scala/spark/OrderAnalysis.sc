@@ -1,5 +1,4 @@
 
-// import frameless.TypedDataset
 import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.{Encoders, SparkSession}
 import org.apache.spark.sql.functions._
@@ -108,11 +107,10 @@ object OrderAnalysis {
           FROM
             products JOIN orders ON products.key = orders.key
         ) GROUP BY store
-      ) SORT BY total DESC
+      )
       """.stripMargin
-    val totals = spark.sql(query).as[Total]
-    totals.show()
-    totals.head()
+    val totals = spark.sql(query).as[Total].collect().sortBy(-_.total)
+    totals.take(1).head
   }
 
 
@@ -124,4 +122,3 @@ assert(max.asString() == "walmart - 31400.0")
 
 val maxSQL = OrderAnalysis.runSQL(path + "orders.txt", path + "products.txt")
 assert(maxSQL.asString() == "walmart - 31400.0")
-
