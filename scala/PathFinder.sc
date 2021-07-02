@@ -44,7 +44,7 @@ class PathFinder(matrix: List[List[Int]])  {
           getNeighbors(r._1, r._2).map{n =>  (n._1, n._2, r._3 ++ n._3)}
         }
       }
-      println("Paths")
+      println(s"Paths:(${paths.length})")
       println("-"*50)
       paths.map(_._3).map{x => println(s"${x.mkString(",")}"); x}
   }
@@ -54,6 +54,16 @@ class PathFinder(matrix: List[List[Int]])  {
 val matrix = List(List(1,2,3), List(4,5,6), List(7,8,9))
 
 new PathFinder(matrix).run()
+
+val matrix2 = List(
+  List(1,2,3,4,5),
+  List(6,7,8,9,10),
+  List(11,12,13,14,15),
+  List(16,17,18,19,20),
+  List(21,22,23,24,25)
+)
+
+new PathFinder(matrix2).run()
 
 
 
