@@ -6,6 +6,8 @@ import org.apache.kafka.common.serialization.{StringDeserializer, StringSerializ
 import java.util.Properties
 import scala.collection.JavaConverters._
 
+// Simplified WordCount example that updates the stream and computes on it synchronously
+
 object KafkaProperties {
 
   val properties: Properties = {

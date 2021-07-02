@@ -27,6 +27,13 @@ case class LinkedList[T](head: Option[T], tail: Option[LinkedList[T]]) {
     deleteRecursive(this, 0).getOrElse(this)
   }
 
+  // Write code to remove duplicates from an unsorted linked list.
+
+  //Implement an algorithm to find the kth to last element of a singly linked list.
+  
+  // Write code to partition a linked list around a value x, such that all nodes less than x come before all nodes greater than or equal to x.
+
+
 }
 
 // 1 -> 2 -> 3
@@ -34,5 +41,3 @@ val ll =  LinkedList(Some(1), Some(LinkedList(Some(2), Some(LinkedList(Some(3), 
 assert(ll.get(1).contains(2))
 // 1 -> 3
 assert(ll.delete(1) == LinkedList(Some(1), Some(LinkedList(Some(3), None))))
-
-
